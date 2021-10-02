@@ -7,12 +7,15 @@ const detectMultipleObjectsFromUrl = async (gcsUri) => {
  * TODO(developer): Uncomment the following line before running the sample.
  */
     const [result] = await client.objectLocalization(gcsUri);
+    console.log(result);
+    if (result.error !== null) throw result.error.message
+    
     const objects = result.localizedObjectAnnotations;
-    const imageObjectNamesAarray = [];
+    const imageObjectNamesArray = [];
     objects.forEach(object => {
-        imageObjectNamesAarray.push(object.name)
+        imageObjectNamesArray.push(object.name)
     });
-    return imageObjectNamesAarray
+    return imageObjectNamesArray
 };
 
 module.exports = {

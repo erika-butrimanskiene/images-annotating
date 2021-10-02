@@ -9,5 +9,10 @@ router.post(
     ImagesController.saveAnnotatedImage
   );
 
+  router.get(
+    '/lastImages/:number',
+    ImagesController.getLastAnnotatedImages
+  );
+
 // Export
 module.exports = router;
