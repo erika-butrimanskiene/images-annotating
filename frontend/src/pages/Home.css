@@ -74,7 +74,7 @@
   }
 
   .home-annotated-images__select{
-    width: 50%;
+    width: 85%;
     display: flex;
     justify-content: flex-end;
   }
@@ -91,4 +91,18 @@
 
   #home-annotated-images__select-value:focus{
    outline: none;
+  }
+
+  @media screen and (min-width: 768px) {
+    .home-annotated-images__select{
+      width: 70%;
+    }
+
+  }
+  
+  @media screen and (min-width: 1025px) {
+    .home-annotated-images__select{
+      width: 50%;
+ 
+    }
   }

@@ -1,21 +1,28 @@
-const Image = require('./imagesModel');
-const api = require('../utils/api')
+import Image from './imagesModel.js';
+import detectMultipleObjectsFromUrl from '../utils/api.js';
 
-const saveAnnotatedImage = async (req, res, next) => {
-    let image = new Image(req.body)
-    try {
-      const imageObjectNamesArray = await api.detectMultipleObjectsFromUrl(req.body.imageUrl)
-      image.objectNamesArr = imageObjectNamesArray;
-      
-      let savedImage = await image.save();
-      res.json(savedImage);
-    } catch (err) {
-      res.statusMessage = err;
-      res.status(400).end();
-    }
+
+const saveAnnotatedImage = async (req, res) => {
+  console.log("test")
+  let image = new Image(req.body);
+  try {
+    const imageObjectNamesArray = await detectMultipleObjectsFromUrl(
+      req.body.imageUrl,
+    );
+    image.objectNamesArr = imageObjectNamesArray;
+
+    let savedImage = await image.save();
+    res.json(savedImage);
+  } catch (err) {
+    res.statusMessage = err;
+    res.status(400).end();
+  }
 };
 
-const getLastAnnotatedImages = async (req, res) => {
+const getLastAnnotatedImages = async (
+  req,
+  res
+) => {
   let number = req.params.number;
   try {
     let annotatedImages = await Image.find({});
@@ -27,8 +34,8 @@ const getLastAnnotatedImages = async (req, res) => {
     res.status(400).end();
   }
 };
-  
-module.exports = {
+
+export default {
   saveAnnotatedImage,
-  getLastAnnotatedImages
+  getLastAnnotatedImages,
 };

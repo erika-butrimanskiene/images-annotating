@@ -1,14 +1,15 @@
-require('dotenv').config();
 
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const routes = require('./routes/routes');
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import routes from './routes/routes.js';
 
+dotenv.config();
 const app = express();
 const PORT = 5000;
 
-// // Cors options
+// // Cors options 
 // const corsOptions = { exposedHeaders: ['game-token'] };
 
 app.use(cors());
@@ -22,7 +23,9 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then((res) => {
+  .then(() => {
     console.log(`Server is running on port: ${PORT}`);
     app.listen(PORT);
   });
+
+

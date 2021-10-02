@@ -1,18 +1,13 @@
-const router = require('express').Router();
+import express from 'express';
+const router = express.Router();
 
 // Controllers
-const ImagesController = require('../images/imagesController');
+import ImagesController from '../images/imagesController.js';
 
 // Images routes
-router.post(
-    '/images/annotate',
-    ImagesController.saveAnnotatedImage
-  );
+router.post('/images/annotate', ImagesController.saveAnnotatedImage);
 
-  router.get(
-    '/lastImages/:number',
-    ImagesController.getLastAnnotatedImages
-  );
+router.get('/lastImages/:number', ImagesController.getLastAnnotatedImages);
 
 // Export
-module.exports = router;
+export default router;

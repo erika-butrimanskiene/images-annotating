@@ -3,12 +3,20 @@ import './Home.css';
 import ImageWithResults from '../components/ImageWithResults';
 import Spinner from '../components/Spinner';
 
+interface iLastAnnotatedImages {
+  imageUrl: string;
+  objectNamesArr: string[];
+  _id?: string;
+}
+
 const Home = () => {
   //states
-  const [errorMsg, setErrorMsg] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [urlForAnnotate, setUrlForAnnotate] = useState('');
-  const [lastAnnotatedImages, setLastAnnotatedImages] = useState([]);
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [urlForAnnotate, setUrlForAnnotate] = useState<string>('');
+  const [lastAnnotatedImages, setLastAnnotatedImages] = useState<
+    iLastAnnotatedImages[]
+  >([]);
 
   //functions
   const handleImageAnnotating = async () => {
