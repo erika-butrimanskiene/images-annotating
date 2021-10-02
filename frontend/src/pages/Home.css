@@ -69,6 +69,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px 0px 30px 0px;
+    padding: 15px 0px 30px 0px;
     width: 100%;
+  }
+
+  .home-annotated-images__select{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #home-annotated-images__select-value{
+    margin-left: 15px;
+    padding: 0px 7px;
+    background-color: var(--white-color);
+    border: none;
+    border-radius: 5px;
+    font-family: var(--main-font);
+    font-size: 18px;
+  }
+
+  #home-annotated-images__select-value:focus{
+   outline: none;
   }

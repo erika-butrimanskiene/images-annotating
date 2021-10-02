@@ -22,7 +22,6 @@ const Home = () => {
         },
         body: JSON.stringify({ imageUrl: urlForAnnotate }),
       });
-      console.log(response);
 
       if (response.status === 200) {
         const imageAnnotatingResult = await response.json();
@@ -53,22 +52,23 @@ const Home = () => {
     setLastAnnotatedImages(lastAnotatedImagesCopy);
   };
 
+  const getLastAnnotatedImages = async (number: string) => {
+    const response = await fetch(`http://localhost:5000/lastImages/${number}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status === 200) {
+      const lastAnnotatedImages = await response.json();
+      setLastAnnotatedImages(lastAnnotatedImages);
+    }
+  };
+
   //effects
   useEffect(() => {
-    const getLastAnnotatedImages = async () => {
-      const response = await fetch('http://localhost:5000/lastImages/5', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.status === 200) {
-        const lastFiveAnnotatedImages = await response.json();
-        setLastAnnotatedImages(lastFiveAnnotatedImages);
-      }
-    };
-    getLastAnnotatedImages();
+    getLastAnnotatedImages('5');
   }, []);
 
   return (
@@ -99,6 +99,25 @@ const Home = () => {
         )}
       </div>
       <div className='home-annotated-images'>
+        <div className='home-annotated-images__select'>
+          <select
+            name='select'
+            id='home-annotated-images__select-value'
+            onChange={(e) => {
+              getLastAnnotatedImages(e.target.value);
+            }}
+          >
+            <option className='select-value' value='5'>
+              5 images
+            </option>
+            <option className='select-value' value='10'>
+              10 images
+            </option>
+            <option className='select-value' value='15'>
+              15 images
+            </option>
+          </select>
+        </div>
         {lastAnnotatedImages.map(
           (item: { imageUrl: string; objectNamesArr: string[] }, index) => (
             <ImageWithResults
