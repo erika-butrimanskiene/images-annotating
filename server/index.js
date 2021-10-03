@@ -7,15 +7,11 @@ import routes from './routes/routes.js';
 
 dotenv.config();
 const app = express();
-const PORT = 5000;
-
-// // Cors options 
-// const corsOptions = { exposedHeaders: ['game-token'] };
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 app.use('/', routes);
-// app.use('/uploads', express.static('uploads'));
 
 //Database
 mongoose
