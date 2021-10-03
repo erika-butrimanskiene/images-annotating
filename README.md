@@ -20,7 +20,11 @@ DB_URI='{your mongo database cluster url}'
 
 3.2.nodemon (to run backend) 
 
-4.go to cd frontend, then run commands: 4.1. npm install (install node modules), 4.2. npm start (to run React project) 
+4.go to cd frontend, then run commands: 
+
+4.1. npm install (install node modules), 
+
+4.2. npm start (to run React project) 
 
 Then type image url and check this application ;)
 
