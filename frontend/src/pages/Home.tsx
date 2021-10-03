@@ -24,13 +24,16 @@ const Home = () => {
     setLoading(true);
     if (urlForAnnotate !== '') {
       try {
-        const response = await fetch('http://localhost:5000/images/annotate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await fetch(
+          'https://images-annotating.herokuapp.com/images/annotate',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ imageUrl: urlForAnnotate }),
           },
-          body: JSON.stringify({ imageUrl: urlForAnnotate }),
-        });
+        );
 
         if (response.status === 200) {
           const imageAnnotatingResult = await response.json();
@@ -56,7 +59,7 @@ const Home = () => {
   const getLastAnnotatedImages = async (number: string) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/lastImages/${number}`,
+        `https://images-annotating.herokuapp.com/lastImages/${number}`,
         {
           method: 'GET',
           headers: {
