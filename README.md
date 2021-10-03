@@ -2,7 +2,7 @@
 
 Hi,
 
-I've deployed page (backend at heroku, frontend at netlify), so you can check it within this link - https://images-annotating.netlify.app
+I've deployed page (backend on heroku, frontend on netlify), so you can check it within this link - https://images-annotating.netlify.app
 
 Also, you can download code and run it by these steps:
 1.Download code;
