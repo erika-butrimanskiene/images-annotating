@@ -1,8 +1,9 @@
 import express from 'express';
-const router = express.Router();
 
 // Controllers
 import ImagesController from '../images/imagesController.js';
+
+const router = express.Router();
 
 // Images routes
 router.post('/images/annotate', ImagesController.saveAnnotatedImage);

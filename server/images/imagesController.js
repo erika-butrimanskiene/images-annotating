@@ -3,7 +3,6 @@ import detectMultipleObjectsFromUrl from '../utils/api.js';
 
 
 const saveAnnotatedImage = async (req, res) => {
-  console.log("test")
   let image = new Image(req.body);
   try {
     const imageObjectNamesArray = await detectMultipleObjectsFromUrl(

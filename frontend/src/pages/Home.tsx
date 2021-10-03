@@ -23,28 +23,57 @@ const Home = () => {
     setErrorMsg('');
     setLoading(true);
     if (urlForAnnotate !== '') {
-      const response = await fetch('http://localhost:5000/images/annotate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ imageUrl: urlForAnnotate }),
-      });
+      try {
+        const response = await fetch('http://localhost:5000/images/annotate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ imageUrl: urlForAnnotate }),
+        });
 
-      if (response.status === 200) {
-        const imageAnnotatingResult = await response.json();
-        updateLastAnnotatedImages(
-          imageAnnotatingResult.imageUrl,
-          imageAnnotatingResult.objectNamesArr,
-        );
-        setUrlForAnnotate('');
-      } else {
-        setErrorMsg('*Something went wrong, please double check your URL');
+        if (response.status === 200) {
+          const imageAnnotatingResult = await response.json();
+          updateLastAnnotatedImages(
+            imageAnnotatingResult.imageUrl,
+            imageAnnotatingResult.objectNamesArr,
+          );
+          setUrlForAnnotate('');
+        } else {
+          throw new Error(
+            '*Something went wrong, please double check your URL',
+          );
+        }
+      } catch (err: any) {
+        setErrorMsg(err.message);
       }
     } else {
       setErrorMsg('*Please type URL');
     }
     setLoading(false);
+  };
+
+  const getLastAnnotatedImages = async (number: string) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/lastImages/${number}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      if (response.status === 200) {
+        const lastAnnotatedImages = await response.json();
+        setLastAnnotatedImages(lastAnnotatedImages);
+      } else {
+        throw new Error('*Something went wrong...');
+      }
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   const updateLastAnnotatedImages = (
@@ -58,20 +87,6 @@ const Home = () => {
     lastAnotatedImagesCopy.unshift({ imageUrl, objectNamesArr });
     lastAnotatedImagesCopy.pop();
     setLastAnnotatedImages(lastAnotatedImagesCopy);
-  };
-
-  const getLastAnnotatedImages = async (number: string) => {
-    const response = await fetch(`http://localhost:5000/lastImages/${number}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.status === 200) {
-      const lastAnnotatedImages = await response.json();
-      setLastAnnotatedImages(lastAnnotatedImages);
-    }
   };
 
   //effects
