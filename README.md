@@ -10,7 +10,7 @@ Also, you can download code and run it by these steps:
 
 2.in server folder create file ".env", in this file add two environment variables:
 
-GOOGLE_APPLICATION_CREDENTIALS="{your path to google application credentials json file}"
+GOOGLE_APPLICATION_CREDENTIALS="{path to your google application credentials json file}"
 
 DB_URI='{your mongo database cluster url}'
 
