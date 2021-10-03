@@ -9,9 +9,13 @@ Also, you can download code and run it by these steps:
 1.Download code;
 
 2.go to cd server, then run commands: 
+
 2.1. npm install (install node modules), 
+
 2.2.in server folder create file ".env", in this file add two environment variables:
+
 GOOGLE_APPLICATION_CREDENTIALS="{your path to google application credentials json file}"
+
 DB_URI='{your mongo database cluster url}'
 
 2.3.nodemon (to run backend) 
